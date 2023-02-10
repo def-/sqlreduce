@@ -6,10 +6,13 @@ import time
 
 from pglast.stream import IndentedStream
 import sqlreduce
+import sys
 
 #from loguru import logger
 #@logger.catch
 def sqlreduce_main():
+    sys.setrecursionlimit(100000)
+
     argparser = argparse.ArgumentParser(description="Reduce a SQL query to the minimal query throwing the same error")
     argparser.add_argument("-d", "--database", type=str, default="", help="Database or connection string to use")
     argparser.add_argument("-f", "--file", type=argparse.FileType('r'), default=sys.stdin, help="Read query from file [Default: stdin]")
