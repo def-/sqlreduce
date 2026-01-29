@@ -8,6 +8,7 @@ import time
 import os
 import sys
 import yaml
+from difflib import SequenceMatcher
 
 def getattr_path(obj, path):
     if path == []:
@@ -84,6 +85,7 @@ def try_reduce(state, path, node):
 
     error = run_query(state, query)
     # if running the reduced query yields a different result, stop recursion here
+    #if SequenceMatcher(None, error, state['expected_error']).ratio() > 0.8:
     if error != state['expected_error']:
         if state['verbose']:
             if state['terminal']:
